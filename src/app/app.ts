@@ -29,6 +29,7 @@ export class App implements OnInit {
     this.employeeService.getEmployees().subscribe(
       (response: Employee[]) => {
         this.employees = response;
+        console.log(this.employees);
       },
       (error:HttpErrorResponse) => {
         alert(error.message);
