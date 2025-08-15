@@ -36,4 +36,26 @@ export class App implements OnInit {
       }
     );
   }
+
+  // Method to open the right modal when the button is clicked
+  public onOpenModal(employee: Employee | null, mode: string ) : void {
+    const container = document.getElementById('main-container');
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.style.display = 'none';
+    button.setAttribute('data-bs-toggle', 'modal');
+    // set data-target value depending on mode value
+    if (mode === 'add') {
+      button.setAttribute('data-bs-target', '#addEmployeeModal');
+    }
+    if (mode === 'edit') {
+      button.setAttribute('data-bs-target', '#updateEmployeeModal');
+    }
+    if (mode === 'delete') {
+      button.setAttribute('data-bs-target', '#deleteEmployeeModal');
+    }
+    //create the button in the main-container
+    container?.appendChild(button);
+    button.click();
+  }
 }
