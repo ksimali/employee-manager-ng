@@ -35,3 +35,15 @@ h1, h2, h3, h4, h5, h6 {
 a {
     color: #707070;
 }
+
+.add-btn {
+    cursor: pointer; /* fait apparaître la main */
+    transition: background-color 0.3s, transform 0.2s; /* transition douce */
+  }
+  
+.add-btn:hover {
+background-color: #ffff; /* change légèrement la couleur au survol */
+color: #0056b3 !important;
+transform: scale(1.05); /* effet zoom léger */
+}
+  
