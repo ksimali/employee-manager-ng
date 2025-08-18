@@ -16,6 +16,7 @@ export class App implements OnInit {
   
   // property
   public employees: Employee[] = [];
+  public editEmployee: Employee | null=null;
 
   // constructor with the employee.service injection
   constructor(private employeeService: EmployeeService) {}
@@ -50,6 +51,7 @@ export class App implements OnInit {
       button.setAttribute('data-bs-target', '#addEmployeeModal');
     }
     if (mode === 'edit') {
+      this.editEmployee = employee;
       button.setAttribute('data-bs-target', '#updateEmployeeModal');
     }
     if (mode === 'delete') {
