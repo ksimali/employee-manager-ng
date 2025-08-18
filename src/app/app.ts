@@ -4,10 +4,11 @@ import { EmployeeService } from './services/employee.service';
 import { Employee } from './models/employee.model';
 import { HttpErrorResponse, provideHttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
@@ -57,5 +58,33 @@ export class App implements OnInit {
     //create the button in the main-container
     container?.appendChild(button);
     button.click();
+  }
+
+  // Method to add an employee
+  public onAddEmployee(addForm: NgForm) : void {
+    // close the addForm when submit with success
+    document.getElementById("add-employee-form")?.click();
+    this.employeeService.addEmployee(addForm.value).subscribe(
+      (response: Employee) => {
+        console.log(response);
+        this.getEmployees();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
+
+  // Method to update an employee
+  public onUpdateEmployee(employee: Employee) : void {
+    this.employeeService.updateEmployee(employee).subscribe(
+      (response : Employee) => {
+        console.log(response);
+        this.getEmployees();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
   }
 }
