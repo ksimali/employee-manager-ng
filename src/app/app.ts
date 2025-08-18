@@ -17,6 +17,7 @@ export class App implements OnInit {
   // property
   public employees: Employee[] = [];
   public editEmployee: Employee | null=null;
+  public deleteEmployee: Employee | null=null;
 
   // constructor with the employee.service injection
   constructor(private employeeService: EmployeeService) {}
@@ -55,6 +56,7 @@ export class App implements OnInit {
       button.setAttribute('data-bs-target', '#updateEmployeeModal');
     }
     if (mode === 'delete') {
+      this.deleteEmployee = employee;
       button.setAttribute('data-bs-target', '#deleteEmployeeModal');
     }
     //create the button in the main-container
@@ -83,6 +85,22 @@ export class App implements OnInit {
   public onUpdateEmployee(employee: Employee) : void {
     this.employeeService.updateEmployee(employee).subscribe(
       (response : Employee) => {
+        console.log(response);
+        this.getEmployees();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
+
+  // Method to delete an employee
+  public onDeleteEmployee(employeeId?: number) : void {
+    if (employeeId === undefined) return;
+    // close the deleteForm when delete success
+    document.getElementById("delete-employee-form")?.click();
+    this.employeeService.deleteEmployee(employeeId).subscribe(
+      (response : void) => {
         console.log(response);
         this.getEmployees();
       },
