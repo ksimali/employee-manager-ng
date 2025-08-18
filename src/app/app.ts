@@ -109,4 +109,21 @@ export class App implements OnInit {
       }
     );
   }
+
+  // Method to search employees
+  public searchEmployees(key:string): void {
+    const results: Employee[] = [];
+    for(const employee of this.employees) {
+      if(employee.name.toLowerCase().indexOf(key.toLowerCase()) !== -1
+      || employee.email.toLowerCase().indexOf(key.toLowerCase()) !== -1
+      || employee.phone.toLowerCase().indexOf(key.toLowerCase()) !== -1
+      || employee.jobTitle.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
+        results.push(employee);
+      }
+    }
+    this.employees = results;
+    if(results.length === 0 || !key) {
+      this.getEmployees();
+    }
+  }
 }
