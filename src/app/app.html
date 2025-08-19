@@ -161,9 +161,11 @@
   </div>
 </div>
 <!-- Notification for no employees -->
-<div class="col-lg-12 col-md-12 col-x1-12">
-  <div class="alert alert-info" role="alert">
-    <h4 class="alert-headin">NO EMPLOYEES!</h4>
-    <p>NO Employees were found</p>
-  </div>
-</div>
+ @if (employees.length == 0) {
+   <div class="col-lg-12 col-md-12 col-x1-12">
+      <div class="alert alert-info" role="alert">
+        <h4 class="alert-headin">NO EMPLOYEES!</h4>
+        <p>NO Employees were found</p>
+      </div>
+    </div>
+ }
